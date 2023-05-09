@@ -7,4 +7,4 @@ const connection = mysql.createPool({
   database: "warehouse",
 });
 
-module.exports = connection ;
+module.exports = connection;
