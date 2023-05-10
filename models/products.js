@@ -35,7 +35,7 @@ exports.updateItem = async (params) => {
     updateValues.push(params.pardavimo_suma);
   }
 
-  if (params.likutis) {
+  if (typeof params.likutis !== "undefined" && params.likutis !== null) {
     updateQuery += " likutis = ?,";
     updateValues.push(params.likutis);
   }
@@ -62,11 +62,8 @@ exports.createOrder = async (params) => {
 
 //pardavimui
 
-
 //prekes suradimui
 exports.findItem = async (params) => {
-  let find = await con.query(
-    "SELECT * from produktai WHERE id = ?", 
-    params);
+  let find = await con.query("SELECT * from produktai WHERE id = ?", params);
   return find;
 };
