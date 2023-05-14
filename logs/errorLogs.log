@@ -1,0 +1,3 @@
+2023-05-14T17:04:39.287Z - error: Failed to add item Bind parameters must not contain undefined. To pass SQL NULL specify JS null
+2023-05-14T17:11:08.117Z - error: Failed to find item Cannot read properties of undefined (reading 'pirkimo_suma')
+2023-05-14T17:11:27.525Z - error: Failed to find item Cannot read properties of undefined (reading 'pirkimo_suma')

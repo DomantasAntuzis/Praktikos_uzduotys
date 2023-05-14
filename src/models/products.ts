@@ -15,6 +15,7 @@ export function addItem(params: ItemParams): Promise<any> {
     sql: "INSERT INTO produktai (pavadinimas, aprasymas, pirkimo_suma, pardavimo_suma, likutis) VALUES (?, ?, ?, ?, ?)",
     values: Object.values(params),
   };
+  console.log(insert);
   return con.execute(insert);
 }
 
@@ -39,7 +40,7 @@ export function updateItem(params: UpdateItemParams): Promise<any> {
   if (params.aprasymas) {
     updateQuery += " aprasymas = ?,";
     updateValues.push(params.aprasymas);
-  }
+  } 
 
   if (params.pirkimo_suma) {
     updateQuery += " pirkimo_suma = ?,";
