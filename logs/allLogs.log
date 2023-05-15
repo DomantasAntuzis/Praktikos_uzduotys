@@ -12,3 +12,33 @@
 2023-05-14T17:19:04.211Z - info: Server Running here 👉 https://localhost:3000
 2023-05-14T17:19:24.900Z - info: Server Running here 👉 https://localhost:3000
 2023-05-14T17:20:14.585Z - info: Server Running here 👉 https://localhost:3000
+2023-05-14T17:21:35.443Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T05:52:28.047Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T05:53:08.323Z - info: Added new item: 30. Updated data: aprasymas: ibihvuas, pirkimo_suma: 7, pardavimo suma: 20, likutis: 0
+2023-05-15T05:54:15.103Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T05:56:19.423Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T05:58:14.778Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T05:58:34.776Z - info: Added new item: 302. Updated data: aprasymas: ibbibib, pirkimo_suma: 9, pardavimo suma: 15, likutis: 0
+2023-05-15T06:01:47.982Z - error: Validation error while adding item "likutis" must be a number
+2023-05-15T06:10:20.580Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:10:57.071Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:12:04.565Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:13:17.139Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:13:18.033Z - info: Item with id: undefined was updated successfully.
+2023-05-15T06:14:23.872Z - info: Item with id: undefined was not found
+2023-05-15T06:15:00.444Z - info: Item with id: undefined was not found
+2023-05-15T06:15:20.742Z - info: Item with id: undefined was not found
+2023-05-15T06:15:29.443Z - info: Item with id: undefined was updated successfully.
+2023-05-15T06:16:43.911Z - info: Item with id: undefined was updated successfully.
+2023-05-15T06:24:16.124Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:27:39.359Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:30:02.765Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:30:14.266Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:31:34.950Z - info: Buy order created successfully for item: 9. Amount bought: 1 for a total of: -9
+2023-05-15T06:32:12.343Z - info: Sell order created successfully for item: 9. Amount sold: 1 for a total of: 9
+2023-05-15T06:34:29.263Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:35:25.813Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:37:29.845Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T06:37:46.375Z - info: Buy order created successfully for item: 3. Amount bought: 1 for a total of: -1
+2023-05-15T06:38:02.563Z - info: Sell order created successfully for item: 3. Amount sold: 1 for a total of: 1
+2023-05-15T06:38:21.390Z - error: Failed to find item Cannot read properties of undefined (reading 'pirkimo_suma')

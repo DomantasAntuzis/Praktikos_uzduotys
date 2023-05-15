@@ -7,7 +7,7 @@ router.post("/addItem", (req: Request, res: Response) => {
   productsController.addItem(req, res);
 });
 
-router.put("/updateItem/:id", (req: Request, res: Response) => {
+router.put("/updateItem", (req: Request, res: Response) => {
   productsController.updateItem(req, res);
 });
 
