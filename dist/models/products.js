@@ -10,6 +10,7 @@ function addItem(params) {
         sql: "INSERT INTO produktai (pavadinimas, aprasymas, pirkimo_suma, pardavimo_suma, likutis) VALUES (?, ?, ?, ?, ?)",
         values: Object.values(params),
     };
+    console.log(insert);
     return database_1.default.execute(insert);
 }
 exports.addItem = addItem;

@@ -22,45 +22,83 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sellOrder = exports.buyOrder = void 0;
 const query = __importStar(require("../models/operations"));
 const query2 = __importStar(require("../models/products"));
-// import logger from "../config/logger";
+const joi_1 = __importDefault(require("joi"));
+const logger_1 = __importDefault(require("../config/logger"));
+const orderSchema = joi_1.default.object({
+    produkto_id: joi_1.default.string().required(),
+    kiekis: joi_1.default.number().required(),
+});
 function buyOrder(req, res) {
-    let { produkto_id, kiekis } = req.body;
+    const { error: validationError, value: validData } = orderSchema.validate(req.body);
+    if (validationError) {
+        logger_1.default.error("Validation error while creating buy order", validationError);
+        res.status(400).json({
+            success: false,
+            message: "Invalid request data",
+            error: validationError.details.map((detail) => detail.message),
+        });
+        return;
+    }
+    let { produkto_id, kiekis } = validData;
     kiekis = parseInt(kiekis, 10);
     query
         .findItem({ id: produkto_id })
         .then((item) => {
-        const kaina = item[0][0].pirkimo_suma;
+        const kaina = parseInt(item[0][0].pirkimo_suma);
         const suma = kiekis * -kaina;
         const currentLikutis = item[0][0].likutis;
         const likutis = currentLikutis + kiekis;
-        const id = Number(produkto_id);
-        query2.updateItem({
-            id,
-            likutis,
-        });
-        query.createOrder({ produkto_id, kiekis, kaina, suma });
-        // logger.info(`Buy order created successfully for item: ${produkto_id}. Amount bought: ${kiekis}, for a total of: ${suma}`);
-        res.status(200).json({
-            success: true,
-            message: "Buy order was successful",
+        const id = produkto_id;
+        query2
+            .updateItem({ id, likutis })
+            .then(() => {
+            return query.createOrder({ produkto_id: id, kiekis, kaina, suma });
+        })
+            .then(() => {
+            logger_1.default.info(`Buy order created successfully for item: ${produkto_id}. Amount bought: ${kiekis} for a total of: ${suma}`);
+            res.status(200).json({
+                success: true,
+                message: "Buy order was successful",
+            });
+        })
+            .catch((error) => {
+            logger_1.default.error("Failed to make buy order", error);
+            res.status(500).json({
+                success: false,
+                message: "Failed to make buy order",
+                error: error.message,
+            });
         });
     })
         .catch((error) => {
-        // logger.error("Failed to create buy order", error);
+        logger_1.default.error("Failed to find item", error);
         res.status(500).json({
             success: false,
-            message: "Failed to make buy order",
+            message: "Failed to find item",
             error: error.message,
         });
     });
 }
 exports.buyOrder = buyOrder;
 function sellOrder(req, res) {
-    let { produkto_id, kiekis } = req.body;
+    const { error: validationError, value: validData } = orderSchema.validate(req.body);
+    if (validationError) {
+        logger_1.default.error("Validation error while creating buy order", validationError);
+        res.status(400).json({
+            success: false,
+            message: "Invalid request data",
+            error: validationError.details.map((detail) => detail.message),
+        });
+        return;
+    }
+    let { produkto_id, kiekis } = validData;
     kiekis = parseInt(kiekis, 10);
     query
         .findItem({ id: produkto_id })
@@ -69,23 +107,33 @@ function sellOrder(req, res) {
         const suma = kiekis * kaina;
         const currentLikutis = item[0][0].likutis;
         const likutis = currentLikutis - kiekis;
-        let id = produkto_id;
-        query2.updateItem({
-            id,
-            likutis,
-        });
-        query.createOrder({ produkto_id, kiekis, kaina, suma });
-        // logger.info(`Sell order created successfully for item: ${produkto_id}. Amount sold: ${kiekis} for a total of: ${suma}`);
-        res.status(200).json({
-            success: true,
-            message: "Sell order was successful",
+        const id = produkto_id;
+        query2
+            .updateItem({ id, likutis })
+            .then(() => {
+            return query.createOrder({ produkto_id: id, kiekis, kaina, suma });
+        })
+            .then(() => {
+            logger_1.default.info(`Sell order created successfully for item: ${produkto_id}. Amount sold: ${kiekis} for a total of: ${suma}`);
+            res.status(200).json({
+                success: true,
+                message: "Sell order was successful",
+            });
+        })
+            .catch((error) => {
+            logger_1.default.error("Failed to make sell order", error);
+            res.status(500).json({
+                success: false,
+                message: "Failed to make sell order",
+                error: error.message,
+            });
         });
     })
         .catch((error) => {
-        // logger.error("Failed to create sell order", error);
+        logger_1.default.error("Failed to find item", error);
         res.status(500).json({
             success: false,
-            message: "Failed to make sell order",
+            message: "Failed to find item",
             error: error.message,
         });
     });

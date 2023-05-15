@@ -32,7 +32,7 @@ const router = express_1.default.Router();
 router.post("/addItem", (req, res) => {
     productsController.addItem(req, res);
 });
-router.put("/updateItem/:id", (req, res) => {
+router.put("/updateItem", (req, res) => {
     productsController.updateItem(req, res);
 });
 exports.default = router;

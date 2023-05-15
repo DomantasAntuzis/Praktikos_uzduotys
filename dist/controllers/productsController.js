@@ -22,34 +22,37 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateItem = exports.addItem = void 0;
 const query = __importStar(require("../models/products"));
-// import logger from '../config/logger';
+const logger_1 = __importDefault(require("../config/logger"));
+const joi_1 = __importDefault(require("joi"));
+const addItemSchema = joi_1.default.object({
+    pavadinimas: joi_1.default.string().required(),
+    aprasymas: joi_1.default.string().required(),
+    pirkimo_suma: joi_1.default.number().required(),
+    pardavimo_suma: joi_1.default.number().required(),
+    likutis: joi_1.default.number().required(),
+});
 function addItem(req, res) {
-    const { pavadinimas, aprasymas, pirkimo_suma, pardavimo_suma, likutis } = req.body;
-    query.addItem({
-        pavadinimas,
-        aprasymas,
-        pirkimo_suma,
-        pardavimo_suma,
-        likutis,
-    })
+    const { error: validationError, value: validData } = addItemSchema.validate(req.body);
+    if (validationError) {
+        logger_1.default.error("Validation error while adding item", validationError);
+        res.status(400).json({
+            success: false,
+            message: "Invalid request data",
+            error: validationError.details.map((detail) => detail.message),
+        });
+        return;
+    }
+    console.log(validData);
+    query
+        .addItem(validData)
         .then((result) => {
-        // logger.info(
-        //   `Added new item: ${pavadinimas}. Updated data: aprasymas: ${aprasymas}, pirkimo_suma: ${pirkimo_suma}, pardavimo suma: ${pardavimo_suma}, likutis: ${likutis}`
-        // );
+        logger_1.default.info(`Added new item: ${validData.pavadinimas}. Updated data: aprasymas: ${validData.aprasymas}, pirkimo_suma: ${validData.pirkimo_suma}, pardavimo suma: ${validData.pardavimo_suma}, likutis: ${validData.likutis}`);
         res.status(200).json({
             success: true,
             message: "Item added successfully",
@@ -57,7 +60,7 @@ function addItem(req, res) {
         });
     })
         .catch((error) => {
-        // logger.error("Failed to create sell order", error);
+        logger_1.default.error("Failed to add item", error);
         res.status(500).json({
             success: false,
             message: "Failed to add item",
@@ -66,25 +69,39 @@ function addItem(req, res) {
     });
 }
 exports.addItem = addItem;
+const updateItemSchema = joi_1.default.object({
+    id: joi_1.default.string().required(),
+    pavadinimas: joi_1.default.string(),
+    aprasymas: joi_1.default.string(),
+    pirkimo_suma: joi_1.default.number(),
+    pardavimo_suma: joi_1.default.number(),
+    likutis: joi_1.default.number(),
+});
 function updateItem(req, res) {
-    const itemId = req.params.id;
-    const _a = req.body, { id } = _a, updatedFields = __rest(_a, ["id"]);
+    const { error: validationError, value: validData } = updateItemSchema.validate(req.body);
+    if (validationError) {
+        logger_1.default.error("Validation error while updating item", validationError);
+        res.status(400).json({
+            success: false,
+            message: "Invalid request data",
+            error: validationError.details.map((detail) => detail.message),
+        });
+        return;
+    }
     query
-        .updateItem(Object.assign({ id: itemId }, updatedFields))
+        .updateItem(validData)
         .then((updateResult) => {
         if (updateResult[0].affectedRows > 0) {
-            // logger.info(
-            //   `Item with id: ${itemId} was updated successfully. Updated columns: ${JSON.stringify(updatedFields)}`
-            // );
+            logger_1.default.info(`Item with id: ${validData.itemId} was updated successfully.`);
             res.status(200).json({ message: "Item updated successfully" });
         }
         else {
-            // logger.info(`Item with id: ${itemId} was not found`);
+            logger_1.default.info(`Item with id: ${validData.itemId} was not found`);
             res.status(404).json({ error: "Item not found" });
         }
     })
         .catch((error) => {
-        // logger.error("Failed to update item", error);
+        logger_1.default.error("Failed to update item", error);
         res.status(500).json({ error: "Internal server error" });
     });
 }

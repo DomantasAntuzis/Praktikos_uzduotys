@@ -42,3 +42,11 @@
 2023-05-15T06:37:46.375Z - info: Buy order created successfully for item: 3. Amount bought: 1 for a total of: -1
 2023-05-15T06:38:02.563Z - info: Sell order created successfully for item: 3. Amount sold: 1 for a total of: 1
 2023-05-15T06:38:21.390Z - error: Failed to find item Cannot read properties of undefined (reading 'pirkimo_suma')
+2023-05-15T07:40:04.549Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T07:40:21.137Z - error: Validation error while adding item "pavadinimas" is required
+2023-05-15T07:40:36.562Z - info: Added new item: 302. Updated data: aprasymas: <ignore, pirkimo_suma: 9, pardavimo suma: 15, likutis: 0
+2023-05-15T07:41:07.770Z - info: Item with id: undefined was updated successfully.
+2023-05-15T07:41:13.373Z - info: Item with id: undefined was not found
+2023-05-15T07:41:38.583Z - error: Validation error while creating buy order "aprasymas" is not allowed
+2023-05-15T07:41:44.483Z - info: Buy order created successfully for item: 1. Amount bought: 12 for a total of: -108
+2023-05-15T07:42:01.854Z - info: Sell order created successfully for item: 1. Amount sold: 12 for a total of: 108

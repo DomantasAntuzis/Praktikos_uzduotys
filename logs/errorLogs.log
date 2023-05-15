@@ -3,3 +3,5 @@
 2023-05-14T17:11:27.525Z - error: Failed to find item Cannot read properties of undefined (reading 'pirkimo_suma')
 2023-05-15T06:01:47.982Z - error: Validation error while adding item "likutis" must be a number
 2023-05-15T06:38:21.390Z - error: Failed to find item Cannot read properties of undefined (reading 'pirkimo_suma')
+2023-05-15T07:40:21.137Z - error: Validation error while adding item "pavadinimas" is required
+2023-05-15T07:41:38.583Z - error: Validation error while creating buy order "aprasymas" is not allowed

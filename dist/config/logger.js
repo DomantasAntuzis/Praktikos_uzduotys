@@ -22,17 +22,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const operationsController = __importStar(require("../controllers/operationsController"));
-const router = express_1.default.Router();
-router.post("/buyOrder", (req, res) => {
-    operationsController.buyOrder(req, res);
+const winston_1 = __importStar(require("winston"));
+const { combine, timestamp, printf } = winston_1.format;
+const logger = winston_1.default.createLogger({
+    level: 'info',
+    format: combine(timestamp(), printf((info) => `${info.timestamp} - ${info.level}: ${info.message}`)),
+    transports: [
+        new winston_1.default.transports.Console(),
+        new winston_1.default.transports.File({
+            filename: 'logs/errorLogs.log',
+            level: 'error',
+        }),
+        new winston_1.default.transports.File({
+            filename: 'logs/allLogs.log',
+        }),
+    ],
 });
-router.post("/sellOrder", (req, res) => {
-    operationsController.sellOrder(req, res);
-});
-exports.default = router;
+exports.default = logger;
