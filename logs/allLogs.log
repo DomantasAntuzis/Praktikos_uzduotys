@@ -50,3 +50,12 @@
 2023-05-15T07:41:38.583Z - error: Validation error while creating buy order "aprasymas" is not allowed
 2023-05-15T07:41:44.483Z - info: Buy order created successfully for item: 1. Amount bought: 12 for a total of: -108
 2023-05-15T07:42:01.854Z - info: Sell order created successfully for item: 1. Amount sold: 12 for a total of: 108
+2023-05-15T07:53:57.411Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T08:31:31.127Z - info: Server Running here 👉 https://localhost:3000
+2023-05-15T08:31:46.741Z - info: Added new item: 302. Updated data: aprasymas: <ignore>,,,,,,,, pirkimo_suma: 9, pardavimo suma: 15, likutis: 0
+2023-05-15T08:32:26.536Z - error: Validation error while updating item "id" is required
+2023-05-15T08:32:43.174Z - info: Item with id: undefined was not found
+2023-05-15T08:32:47.200Z - info: Item with id: undefined was updated successfully.
+2023-05-15T08:33:10.114Z - error: Validation error while creating buy order "pavadinimas" is not allowed
+2023-05-15T08:33:15.001Z - info: Buy order created successfully for item: 1. Amount bought: 12 for a total of: -108
+2023-05-15T08:33:35.788Z - info: Sell order created successfully for item: 1. Amount sold: 12 for a total of: 108

@@ -29,11 +29,9 @@ exports.up = function (db, callback) {
 };
 
 exports.down = function (db, callback) {
-  // Drop table operacijos
   db.dropTable('operacijos', function (err) {
     if (err) return callback(err);
 
-    // Drop table produktai
     db.dropTable('produktai', callback);
   });
 };
