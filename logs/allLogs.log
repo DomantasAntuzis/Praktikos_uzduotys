@@ -59,3 +59,11 @@
 2023-05-15T08:33:10.114Z - error: Validation error while creating buy order "pavadinimas" is not allowed
 2023-05-15T08:33:15.001Z - info: Buy order created successfully for item: 1. Amount bought: 12 for a total of: -108
 2023-05-15T08:33:35.788Z - info: Sell order created successfully for item: 1. Amount sold: 12 for a total of: 108
+2023-05-17T11:32:16.473Z - info: Server Running here 👉 https://localhost:3000
+2023-05-17T11:37:50.545Z - info: Server Running here 👉 https://localhost:3000
+2023-05-17T11:38:36.730Z - info: Added new item: 3021. Updated data: aprasymas: <ignore>,,,,,,,, pirkimo_suma: 9, pardavimo suma: 15, likutis: 0
+2023-05-17T11:39:05.463Z - info: Buy order created successfully for item: 1. Amount bought: 12 for a total of: -108
+2023-05-17T11:39:19.143Z - info: Sell order created successfully for item: 1. Amount sold: 12 for a total of: 108
+2023-05-17T11:42:46.394Z - info: Server Running here 👉 https://localhost:3000
+2023-05-17T11:43:26.144Z - info: Added new item: test. Updated data: aprasymas: jhvjvuyvb, pirkimo_suma: 2, pardavimo suma: 3, likutis: 0
+2023-05-17T11:44:08.291Z - info: Item with id: 2 was updated successfully.
