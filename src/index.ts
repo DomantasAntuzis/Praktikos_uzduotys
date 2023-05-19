@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import productsRoutes from "./routes/products";
 import operationsRoutes from "./routes/operations";
 import { errorHandlingMiddleware } from "./middlewares/errorHandling";
+import sequelize from "./config/sequelize";
 import logger from "./config/logger";
 
 const app: Application = express();
@@ -20,6 +21,19 @@ app.use((_req: Request, res: Response) => {
   res.status(501).json({ message: "Not Implemented" });
 });
 
-app.listen(PORT, () => {
-  logger.info(`Server Running here 👉 https://localhost:${PORT}`);
-});
+async function startServer() {
+  try {
+    await sequelize.authenticate();
+    logger.info('Connection has been established successfully.');
+    console.log('Connection has been established successfully.');
+    app.listen(PORT, () => {
+      logger.info(`Server Running here 👉 https://localhost:${PORT}`);
+    });
+  } catch (error) {
+    logger.error('Unable to connect to the database: ', error);
+    console.error('Unable to connect to the database: ', error);
+  }
+}
+
+startServer();
+

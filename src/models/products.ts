@@ -1,71 +1,57 @@
-import con from "../config/database";
-import { QueryOptions } from "mysql2";
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../config/sequelize';
 
-interface ItemParams {
+interface ProduktaiAttributes {
+  id?: number;
   pavadinimas: string;
   aprasymas: string;
   pirkimo_suma: number;
   pardavimo_suma: number;
   likutis: number;
-  id?: number;
 }
 
-export function addItem(params: ItemParams): Promise<any> {
-  const insert: QueryOptions = {
-    sql: "INSERT INTO produktai (pavadinimas, aprasymas, pirkimo_suma, pardavimo_suma, likutis) VALUES (?, ?, ?, ?, ?)",
-    values: Object.values(params),
-  };
-  console.log(insert);
-  return con.execute(insert);
+class Produktai extends Model<ProduktaiAttributes> implements ProduktaiAttributes {
+  public id!: number;
+  public pavadinimas!: string;
+  public aprasymas!: string;
+  public pirkimo_suma!: number;
+  public pardavimo_suma!: number;
+  public likutis!: number;
+
+  // Other model configurations (e.g., tableName, timestamps) go here
+
+  // Define associations if needed
 }
 
-interface UpdateItemParams {
-  pavadinimas?: string;
-  aprasymas?: string;
-  pirkimo_suma?: number;
-  pardavimo_suma?: number;
-  likutis?: number;
-  id: number;
-}
-
-export function updateItem(params: UpdateItemParams): Promise<any> {
-  let updateQuery = "UPDATE produktai SET";
-  let updateValues = [];
-
-  if (params.pavadinimas) {
-    updateQuery += " pavadinimas = ?,";
-    updateValues.push(params.pavadinimas);
+Produktai.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    pavadinimas: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    aprasymas: {
+      type: DataTypes.STRING,
+    },
+    pirkimo_suma: {
+      type: DataTypes.DECIMAL(10, 2),
+    },
+    pardavimo_suma: {
+      type: DataTypes.DECIMAL(10, 2),
+    },
+    likutis: {
+      type: DataTypes.INTEGER,
+    },
+  },
+  {
+    sequelize,
+    tableName: 'produktai',
+    timestamps: false,
   }
+);
 
-  if (params.aprasymas) {
-    updateQuery += " aprasymas = ?,";
-    updateValues.push(params.aprasymas);
-  } 
-
-  if (params.pirkimo_suma) {
-    updateQuery += " pirkimo_suma = ?,";
-    updateValues.push(params.pirkimo_suma);
-  }
-
-  if (params.pardavimo_suma) {
-    updateQuery += " pardavimo_suma = ?,";
-    updateValues.push(params.pardavimo_suma);
-  }
-
-  if (typeof params.likutis !== "undefined" && params.likutis !== null) {
-    updateQuery += " likutis = ?,";
-    updateValues.push(params.likutis);
-  }
-
-  updateQuery = updateQuery.slice(0, -1);
-
-  updateQuery += " WHERE id = ?";
-  updateValues.push(params.id);
-
-  const update: QueryOptions = {
-    sql: updateQuery,
-    values: updateValues,
-  };
-  console.log(update);
-  return con.execute(update);
-}
+export default Produktai;

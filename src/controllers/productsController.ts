@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import * as query from "../models/products";
 import logger from "../config/logger";
 import Joi from "joi";
+import Produktai from "../models/products";
 
 const addItemSchema = Joi.object({
   pavadinimas: Joi.string().required(),
@@ -27,7 +27,7 @@ export async function addItem(req: Request, res: Response, next: NextFunction): 
 
     console.log(validData);
 
-    const result = await query.addItem(validData);
+    const result = await Produktai.create(validData);
 
     logger.info(
       `Added new item: ${validData.pavadinimas}. Updated data: aprasymas: ${validData.aprasymas}, pirkimo_suma: ${validData.pirkimo_suma}, pardavimo suma: ${validData.pardavimo_suma}, likutis: ${validData.likutis}`
@@ -66,9 +66,9 @@ export async function updateItem(req: Request, res: Response, next: NextFunction
       return;
     }
 
-    const updateResult = await query.updateItem(validData);
+    const updateResult = await Produktai.update(validData, { where: { id: validData.id } });
 
-    if (updateResult[0].affectedRows > 0) {
+    if (updateResult[0] > 0) {
       logger.info(`Item with id: ${validData.id} was updated successfully.`);
       res.status(200).json({ message: "Item updated successfully" });
     } else {

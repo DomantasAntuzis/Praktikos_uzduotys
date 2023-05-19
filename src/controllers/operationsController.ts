@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import Joi from "joi";
 import logger from "../config/logger";
-import { findItem, createOrder } from "../models/operations";
-import { updateItem } from "../models/products";
+import Produktai from "../models/products";
+import Operacijos from "../models/operations";
 
 const orderSchema = Joi.object({
-  produkto_id: Joi.string().required(),
+  produkto_id: Joi.number().required(),
   kiekis: Joi.number().required(),
 });
 
@@ -26,15 +26,20 @@ export function validateOrderSchema(req: Request, res: Response, next: NextFunct
 
 export async function buyOrder(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { produkto_id, kiekis } = req.body;
-    const item = await findItem({ id: produkto_id });
-    const kaina = parseInt(item[0][0].pirkimo_suma);
+    let { produkto_id, kiekis } = req.body;
+    const item = await Produktai.findByPk(produkto_id);
+    if (!item) {
+      logger.error(`Item with id: ${produkto_id} not found`);
+      res.status(404).json({ error: "Item not found" });
+      return;
+    }
+    kiekis = parseInt(kiekis);
+    const kaina = item.pirkimo_suma;
     const suma = kiekis * -kaina;
-    const currentLikutis = item[0][0].likutis;
+    const currentLikutis = item.likutis;
     const likutis = currentLikutis + kiekis;
-    const id = produkto_id;
-    await updateItem({ id, likutis });
-    await createOrder({ produkto_id: id, kiekis, kaina, suma });
+    await item.update({ likutis });
+    await Operacijos.create({ produkto_id, kiekis, kaina, suma });
     logger.info(`Buy order created successfully for item: ${produkto_id}. Amount bought: ${kiekis} for a total of: ${suma}`);
     res.status(200).json({
       success: true,
@@ -48,15 +53,20 @@ export async function buyOrder(req: Request, res: Response, next: NextFunction):
 
 export async function sellOrder(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { produkto_id, kiekis } = req.body;
-    const item = await findItem({ id: produkto_id });
-    const kaina = item[0][0].pirkimo_suma;
+    let { produkto_id, kiekis } = req.body;
+    const item = await Produktai.findByPk(produkto_id);
+    if (!item) {
+      logger.error(`Item with id: ${produkto_id} not found`);
+      res.status(404).json({ error: "Item not found" });
+      return;
+    }
+    kiekis = parseInt(kiekis);
+    const kaina = item.pirkimo_suma;
     const suma = kiekis * kaina;
-    const currentLikutis = item[0][0].likutis;
+    const currentLikutis = item.likutis;
     const likutis = currentLikutis - kiekis;
-    const id = produkto_id;
-    await updateItem({ id, likutis });
-    await createOrder({ produkto_id: id, kiekis, kaina, suma });
+    await item.update({ likutis });
+    await Operacijos.create({ produkto_id, kiekis, kaina, suma });
     logger.info(`Sell order created successfully for item: ${produkto_id}. Amount sold: ${kiekis} for a total of: ${suma}`);
     res.status(200).json({
       success: true,
