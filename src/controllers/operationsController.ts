@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import Joi from "joi";
-import logger from "../config/logger";
-import Produktai from "../models/products";
-import Operacijos from "../models/operations";
+import logger from "../config/logger.js";
+import Produktai from "../models/products.js";
+import Operacijos from "../models/operations.js";
 
 const orderSchema = Joi.object({
   produkto_id: Joi.number().required(),
@@ -34,9 +34,9 @@ export async function buyOrder(req: Request, res: Response, next: NextFunction):
       return;
     }
     kiekis = parseInt(kiekis);
-    const kaina = item.pirkimo_suma;
+    const kaina = item.dataValues.pirkimo_suma;
     const suma = kiekis * -kaina;
-    const currentLikutis = item.likutis;
+    const currentLikutis = item.dataValues.likutis;
     const likutis = currentLikutis + kiekis;
     await item.update({ likutis });
     await Operacijos.create({ produkto_id, kiekis, kaina, suma });
@@ -61,9 +61,9 @@ export async function sellOrder(req: Request, res: Response, next: NextFunction)
       return;
     }
     kiekis = parseInt(kiekis);
-    const kaina = item.pirkimo_suma;
+    const kaina = item.dataValues.pirkimo_suma;
     const suma = kiekis * kaina;
-    const currentLikutis = item.likutis;
+    const currentLikutis = item.dataValues.likutis;
     const likutis = currentLikutis - kiekis;
     await item.update({ likutis });
     await Operacijos.create({ produkto_id, kiekis, kaina, suma });

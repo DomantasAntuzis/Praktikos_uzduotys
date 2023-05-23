@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import logger from "../config/logger";
+import logger from "../config/logger.js";
 import Joi from "joi";
-import Produktai from "../models/products";
+import Produktai from "../models/products.js";
 
 const addItemSchema = Joi.object({
   pavadinimas: Joi.string().required(),

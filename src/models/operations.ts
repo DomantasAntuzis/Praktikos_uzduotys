@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/sequelize';
+import sequelize from '../config/sequelize.js';
 
 interface OperacijosAttributes {
   id?: number;
@@ -15,10 +15,6 @@ class Operacijos extends Model<OperacijosAttributes> implements OperacijosAttrib
   public kiekis!: number;
   public kaina!: number;
   public suma!: number;
-
-  // Other model configurations (e.g., tableName, timestamps) go here
-
-  // Define associations if needed
 }
 
 Operacijos.init(

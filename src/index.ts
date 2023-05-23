@@ -1,12 +1,17 @@
 import express, { Application, Request, Response } from "express";
-import productsRoutes from "./routes/products";
-import operationsRoutes from "./routes/operations";
-import { errorHandlingMiddleware } from "./middlewares/errorHandling";
-import sequelize from "./config/sequelize";
-import logger from "./config/logger";
+import productsRoutes from "./routes/products.js";
+import operationsRoutes from "./routes/operations.js";
+import { errorHandlingMiddleware } from "./middlewares/errorHandling.js";
+import sequelize from "./config/sequelize.js";
+import logger from "./config/logger.js";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 const app: Application = express();
 const PORT: number = Number(process.env.PORT) || 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 app.use(express.json());
 app.use(express.static(__dirname + "/views"));
