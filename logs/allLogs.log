@@ -46,3 +46,9 @@
 2023-05-25T14:16:33.500Z - info: Item with id: 8 was updated successfully.
 2023-05-25T14:17:06.993Z - info: Item with id: 8 was updated successfully.
 2023-05-25T14:17:20.328Z - info: Item with id: 8 was updated successfully.
+2023-05-25T14:24:25.958Z - info: Connection has been established successfully.
+2023-05-25T14:24:25.964Z - info: Server Running here 👉 https://localhost:3000
+2023-05-25T14:24:38.285Z - info: Added new item: [object Object]. Updated data: aprasymas: [object Object], pirkimo_suma: [object Object], pardavimo suma: [object Object], likutis: [object Object]
+2023-05-25T14:26:36.499Z - info: Connection has been established successfully.
+2023-05-25T14:26:36.503Z - info: Server Running here 👉 https://localhost:3000
+2023-05-25T14:26:38.829Z - info: Added new item: [object Object]

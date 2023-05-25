@@ -39,7 +39,7 @@ export async function addItem(req: Request, res: Response, next: NextFunction): 
     const result = await Produktai.create(validData);
 
     logger.info(
-      `Added new item: ${validData}. Updated data: aprasymas: ${validData}, pirkimo_suma: ${validData}, pardavimo suma: ${validData}, likutis: ${validData}`,
+      `Added new item: ${validData}`,
     );
     res.status(200).json({
       success: true,

@@ -1,20 +1,20 @@
-import winston, { format } from 'winston';
+import winston, { format } from "winston";
 const { combine, timestamp, printf } = format;
 
 const logger = winston.createLogger({
-  level: 'info',
+  level: "info",
   format: combine(
     timestamp(),
-    printf((info) => `${info.timestamp} - ${info.level}: ${info.message}`)
+    printf(info => `${info.timestamp} - ${info.level}: ${info.message}`),
   ),
   transports: [
     new winston.transports.Console(),
     new winston.transports.File({
-      filename: 'logs/errorLogs.log',
-      level: 'error',
+      filename: "logs/errorLogs.log",
+      level: "error",
     }),
     new winston.transports.File({
-      filename: 'logs/allLogs.log',
+      filename: "logs/allLogs.log",
     }),
   ],
 });

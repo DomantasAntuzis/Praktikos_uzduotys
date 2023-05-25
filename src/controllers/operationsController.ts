@@ -83,7 +83,7 @@ export async function sellOrder(req: Request, res: Response, next: NextFunction)
       res.status(404).json({ error: "Item not found" });
       return;
     }
-    const kaina = item.dataValues.pirkimo_suma;
+    const kaina = item.dataValues.pardavimo_suma;
     const suma = kiekis * kaina;
     const currentLikutis = item.dataValues.likutis;
     const likutis = currentLikutis - kiekis;

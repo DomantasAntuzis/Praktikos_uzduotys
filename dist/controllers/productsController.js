@@ -23,11 +23,11 @@ export async function addItem(req, res, next) {
             return;
         }
         const result = await Produktai.create(validData);
-        logger.info(`Added new item: ${validData}. Updated data: aprasymas: ${validData}, pirkimo_suma: ${validData}, pardavimo suma: ${validData}, likutis: ${validData}`);
+        logger.info(`Added new item: ${validData}`);
         res.status(200).json({
             success: true,
             message: "Item added successfully",
-            data: result,
+            data: validData,
         });
     }
     catch (error) {
