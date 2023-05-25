@@ -1,5 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/sequelize.js';
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../config/sequelize.js";
 class Operacijos extends Model {
     id;
     produkto_id;
@@ -31,7 +31,7 @@ Operacijos.init({
     },
 }, {
     sequelize,
-    tableName: 'operacijos',
+    tableName: "operacijos",
     timestamps: false,
 });
 export default Operacijos;

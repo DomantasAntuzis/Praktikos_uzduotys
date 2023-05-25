@@ -1,5 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/sequelize.js';
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../config/sequelize.js";
 
 interface ProduktaiAttributes {
   id?: number;
@@ -49,9 +49,9 @@ Produktai.init(
   },
   {
     sequelize,
-    tableName: 'produktai',
+    tableName: "produktai",
     timestamps: false,
-  }
+  },
 );
 
 export default Produktai;

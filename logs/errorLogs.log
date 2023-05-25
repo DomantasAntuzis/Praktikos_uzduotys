@@ -4,3 +4,5 @@
 2023-05-25T12:20:28.072Z - error: Validation error while adding item "likutis" is required
 2023-05-25T12:28:11.871Z - error: Validation error while adding item "likutis" is required
 2023-05-25T12:28:52.130Z - error: Validation error while creating order "kiekis" must be greater than 0
+2023-05-25T13:26:42.921Z - error: Validation error while adding item "aprasymas" is required
+2023-05-25T13:35:20.009Z - error: Validation error while adding item "pirkimo_suma" is required

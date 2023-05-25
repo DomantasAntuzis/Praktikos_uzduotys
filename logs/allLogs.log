@@ -23,3 +23,26 @@
 2023-05-25T12:29:00.461Z - info: Sell order created successfully for item: 1. Amount sold: 2 for a total of: 14
 2023-05-25T12:29:14.608Z - info: Buy order created successfully for item: 1. Amount bought: 2 for a total of: -14
 2023-05-25T12:29:25.996Z - info: Buy order created successfully for item: 1. Amount bought: 2 for a total of: -14
+2023-05-25T13:03:02.661Z - info: Connection has been established successfully.
+2023-05-25T13:03:02.665Z - info: Server Running here 👉 https://localhost:3000
+2023-05-25T13:07:02.723Z - info: Buy order created successfully for item: 1. Amount bought: 2 for a total of: -14
+2023-05-25T13:07:24.157Z - info: Buy order created successfully for item: 1. Amount bought: 2 for a total of: -14
+2023-05-25T13:07:46.349Z - info: Sell order created successfully for item: 1. Amount sold: 2 for a total of: 14
+2023-05-25T13:15:59.304Z - info: Item with id: 2 was updated successfully.
+2023-05-25T13:21:04.329Z - info: Connection has been established successfully.
+2023-05-25T13:21:04.333Z - info: Server Running here 👉 https://localhost:3000
+2023-05-25T13:21:11.934Z - info: Added new item: [object Object]. Updated data: aprasymas: [object Object], pirkimo_suma: [object Object], pardavimo suma: [object Object], likutis: [object Object]
+2023-05-25T13:21:29.555Z - info: Added new item: [object Object]. Updated data: aprasymas: [object Object], pirkimo_suma: [object Object], pardavimo suma: [object Object], likutis: [object Object]
+2023-05-25T13:26:42.921Z - error: Validation error while adding item "aprasymas" is required
+2023-05-25T13:34:36.518Z - info: Connection has been established successfully.
+2023-05-25T13:34:36.522Z - info: Server Running here 👉 https://localhost:3000
+2023-05-25T13:35:20.009Z - error: Validation error while adding item "pirkimo_suma" is required
+2023-05-25T13:35:25.027Z - info: Added new item: [object Object]. Updated data: aprasymas: [object Object], pirkimo_suma: [object Object], pardavimo suma: [object Object], likutis: [object Object]
+2023-05-25T14:11:16.680Z - info: Connection has been established successfully.
+2023-05-25T14:11:16.685Z - info: Server Running here 👉 https://localhost:3000
+2023-05-25T14:11:28.215Z - info: Item with id: 8 was updated successfully.
+2023-05-25T14:16:20.846Z - info: Connection has been established successfully.
+2023-05-25T14:16:20.852Z - info: Server Running here 👉 https://localhost:3000
+2023-05-25T14:16:33.500Z - info: Item with id: 8 was updated successfully.
+2023-05-25T14:17:06.993Z - info: Item with id: 8 was updated successfully.
+2023-05-25T14:17:20.328Z - info: Item with id: 8 was updated successfully.
