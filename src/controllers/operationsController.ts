@@ -4,36 +4,37 @@ import logger from "../config/logger.js";
 import Produktai from "../models/products.js";
 import Operacijos from "../models/operations.js";
 
-const orderSchema = Joi.object({
-  produkto_id: Joi.number().required(),
-  kiekis: Joi.number().required(),
-});
+export async function buyOrder(req: Request, res: Response, next: NextFunction): Promise<void> {
+  interface IOrder {
+    produkto_id: number;
+    kiekis: number;
+  }
+  
+  const orderSchema = Joi.object<IOrder>({
+    produkto_id: Joi.number().greater(0).integer().required(),
+    kiekis: Joi.number().greater(0).integer().required(),
+  });
 
-export function validateOrderSchema(req: Request, res: Response, next: NextFunction): void {
-  const { error: validationError } = orderSchema.validate(req.body);
+  const validation = orderSchema.validate(req.body);
 
-  if (validationError) {
-    logger.error("Validation error while creating order", validationError);
+  if (validation.error) {
+    logger.error("Validation error while creating order", validation.error);
     res.status(400).json({
       success: false,
       message: "Invalid request data",
-      error: validationError.details.map((detail) => detail.message),
+      error: validation.error.details.map(detail => detail.message),
     });
-  } else {
-    next();
+    return;
   }
-}
 
-export async function buyOrder(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    let { produkto_id, kiekis } = req.body;
+    const { produkto_id, kiekis } = validation.value;
     const item = await Produktai.findByPk(produkto_id);
     if (!item) {
       logger.error(`Item with id: ${produkto_id} not found`);
       res.status(404).json({ error: "Item not found" });
       return;
     }
-    kiekis = parseInt(kiekis);
     const kaina = item.dataValues.pirkimo_suma;
     const suma = kiekis * -kaina;
     const currentLikutis = item.dataValues.likutis;
@@ -52,15 +53,36 @@ export async function buyOrder(req: Request, res: Response, next: NextFunction):
 }
 
 export async function sellOrder(req: Request, res: Response, next: NextFunction): Promise<void> {
+  interface IOrder {
+    produkto_id: number;
+    kiekis: number;
+  }
+  
+  const orderSchema = Joi.object<IOrder>({
+    produkto_id: Joi.number().greater(0).integer().required(),
+    kiekis: Joi.number().greater(0).integer().required(),
+  });
+
+  const validation = orderSchema.validate(req.body);
+
+  if (validation.error) {
+    logger.error("Validation error while creating order", validation.error);
+    res.status(400).json({
+      success: false,
+      message: "Invalid request data",
+      error: validation.error.details.map(detail => detail.message),
+    });
+    return;
+  }
+
   try {
-    let { produkto_id, kiekis } = req.body;
+    const { produkto_id, kiekis } = validation.value;
     const item = await Produktai.findByPk(produkto_id);
     if (!item) {
       logger.error(`Item with id: ${produkto_id} not found`);
       res.status(404).json({ error: "Item not found" });
       return;
     }
-    kiekis = parseInt(kiekis);
     const kaina = item.dataValues.pirkimo_suma;
     const suma = kiekis * kaina;
     const currentLikutis = item.dataValues.likutis;
