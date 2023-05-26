@@ -6,11 +6,19 @@ import sequelize from "./config/sequelize.js";
 import logger from "./config/logger.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./config/swagger.json" assert { type: "json" };
 
 const app: Application = express();
 const PORT: number = Number(process.env.PORT) || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve, 
+  swaggerUi.setup(swaggerDocument),
+);
 
 app.use(express.json());
 app.use(express.static(__dirname + "/views"));
