@@ -13,8 +13,12 @@
   "basePath": "/api",
   "tags": [
     {
-      "name": "addItems",
+      "name": "Items",
       "description": "API for users in the system"
+    },
+    {
+    "name": "Operations",
+    "description": "API to control all operations"
     }
   ],
   "schemes": ["http"],
@@ -35,6 +39,7 @@
 
     "/addItem": {
       "post": {
+        "tags": ["Items"],
         "summary": "adds Item to database",
         "description": "adds Item to database",
         "parameters": [
@@ -47,7 +52,6 @@
             }
           }
         ],
-        "produces": ["application/json"],
         "responses":{
           "200": {
             "description": "OK"
@@ -57,7 +61,97 @@
           }
         }
       }
-    }
+    },
+
+    "/updateItem": {
+      "put": {
+        "tags": ["Items"],
+        "summary": "Update item with given ID",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/schemas/updateItem"
+            }
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "404": {
+            "description": "Item not found"
+          }
+        }
+      }
+    },
+
+    "/allOrders": {
+      "get": {
+        "tags": ["Operations"],
+        "summary": "Get all operations in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/buyOrder": {
+      "post": {
+        "tags": ["Operations"],
+        "summary": "Create new buy order",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Order that we want to create",
+            "schema": {
+              "$ref": "#/definitions/schemas/Orders"
+            }
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Sell order was successful"
+          },
+          "400": {
+            "description": "Item not found or Invalid request data"
+          }
+        }
+      }
+    },
+
+    "/sellOrder": {
+      "post": {
+        "tags": ["Operations"],
+        "summary": "Create new sell order",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "sell order that we want to create",
+            "schema": {
+              "$ref": "#/definitions/schemas/Orders"
+            }
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Sell order was successful"
+          },
+          "400": {
+            "description": "Item not found or Invalid request data"
+          }
+        }
+      }
+    },  
   },
   "definitions":{
     "schemas": {
@@ -81,7 +175,45 @@
             "example": 6.18
           }
         }
+      },
+    "updateItem": {
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type":"string",
+          "example": 1
+        },
+        "pavadinimas": {
+          "type": "string",
+          "example": "pav"
+        },
+        "aprasymas": {
+          "type": "string",
+          "example": "apr"
+        },
+        "pirkimo_suma": {
+          "type": "number",
+          "example": 2.15
+        },
+        "pardavimo_suma": {
+          "type":"number",
+          "example": 6.18
+        }
       }
+    },
+  "Orders": {
+    "required": ["produkto_id", "kiekis"],
+    "properties": {
+      "produkto_id":{
+        "type":"number",
+        "example": 1
+      },
+      "kiekis":{
+        "type":"number",
+        "example": 12
+      }
+    }
+  }
     }
   }
 }
