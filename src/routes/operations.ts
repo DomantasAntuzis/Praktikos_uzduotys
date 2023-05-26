@@ -11,4 +11,8 @@ router.post("/sellOrder",  (req: Request, res: Response, next: NextFunction) => 
   operationsController.sellOrder(req, res, next);
 });
 
+router.get("/allOrders", (req: Request, res: Response, next: NextFunction) => {
+  operationsController.showOrders(req, res, next);
+});
+
 export default router;

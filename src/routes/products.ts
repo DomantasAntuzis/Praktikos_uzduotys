@@ -11,4 +11,8 @@ router.put("/updateItem", (req: Request, res: Response, next: NextFunction) => {
   productsController.updateItem(req, res, next);
 });
 
+router.get("/allItems", (req: Request, res: Response, next: NextFunction) => {
+  productsController.showItems(req, res, next);
+});
+
 export default router;

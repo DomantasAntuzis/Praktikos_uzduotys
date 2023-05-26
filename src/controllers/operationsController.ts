@@ -99,3 +99,15 @@ export async function sellOrder(req: Request, res: Response, next: NextFunction)
     next(error);
   }
 }
+
+export async function showOrders(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const allOrders = await Operacijos.findAll();
+    res.status(200).json({
+      message: allOrders,
+    });
+  } catch (error) {
+    logger.error("Failed to get orders", error);
+    next(error);
+  }
+}

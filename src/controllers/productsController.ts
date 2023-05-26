@@ -87,8 +87,6 @@ export async function updateItem(req: Request, res: Response, next: NextFunction
       return;
     }
 
-    console.log(validData);
-    // res.status(404).json({ error: "Item not found" });
     const updateResult = await Produktai.update( { pavadinimas: validData?.pavadinimas, aprasymas: validData?.aprasymas, pirkimo_suma: validData?.pirkimo_suma, pardavimo_suma: validData?.pardavimo_suma, likutis: validData?.likutis }, { where: { id: validData!.id } });
 
     if (updateResult[0] > 0) {
@@ -100,6 +98,18 @@ export async function updateItem(req: Request, res: Response, next: NextFunction
     }
   } catch (error) {
     logger.error("Failed to update item", error);
+    next(error);
+  }
+}
+
+export async function showItems(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const allItems = await Produktai.findAll();
+    res.status(200).json({
+      message: allItems,
+    });
+  } catch (error) {
+    logger.error("Failed to find items", error);
     next(error);
   }
 }

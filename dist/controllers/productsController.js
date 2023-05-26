@@ -27,7 +27,7 @@ export async function addItem(req, res, next) {
         res.status(200).json({
             success: true,
             message: "Item added successfully",
-            data: validData,
+            data: result,
         });
     }
     catch (error) {
@@ -57,8 +57,6 @@ export async function updateItem(req, res, next) {
             });
             return;
         }
-        console.log(validData);
-        // res.status(404).json({ error: "Item not found" });
         const updateResult = await Produktai.update({ pavadinimas: validData?.pavadinimas, aprasymas: validData?.aprasymas, pirkimo_suma: validData?.pirkimo_suma, pardavimo_suma: validData?.pardavimo_suma, likutis: validData?.likutis }, { where: { id: validData.id } });
         if (updateResult[0] > 0) {
             logger.info(`Item with id: ${validData.id} was updated successfully.`);
@@ -71,6 +69,18 @@ export async function updateItem(req, res, next) {
     }
     catch (error) {
         logger.error("Failed to update item", error);
+        next(error);
+    }
+}
+export async function showItems(req, res, next) {
+    try {
+        const allItems = await Produktai.findAll();
+        res.status(200).json({
+            message: allItems,
+        });
+    }
+    catch (error) {
+        logger.error("Failed to find items", error);
         next(error);
     }
 }

@@ -7,4 +7,7 @@ router.post("/buyOrder", (req, res, next) => {
 router.post("/sellOrder", (req, res, next) => {
     operationsController.sellOrder(req, res, next);
 });
+router.get("/allOrders", (req, res, next) => {
+    operationsController.showOrders(req, res, next);
+});
 export default router;
