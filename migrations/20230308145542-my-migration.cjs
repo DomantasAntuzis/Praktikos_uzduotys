@@ -19,6 +19,18 @@ module.exports = {
       pardavimo_suma: { type: Sequelize.DECIMAL(10, 2) },
       likutis: { type: Sequelize.INTEGER, defaultValue: 0 },
     });
+
+    await queryInterface.addConstraint("operacijos", {
+      fields: ["produkto_id"],
+      type: "foreign key",
+      name: "operacijos_produkto_id_fkey",
+      references: {
+        table: "produktai",
+        field: "id",
+      },
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
   },
 
   down: async queryInterface => {

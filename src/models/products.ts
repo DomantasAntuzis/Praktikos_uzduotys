@@ -17,10 +17,6 @@ class Produktai extends Model<ProduktaiAttributes> implements ProduktaiAttribute
   public pirkimo_suma!: number;
   public pardavimo_suma!: number;
   public likutis!: number;
-
-  // Other model configurations (e.g., tableName, timestamps) go here
-
-  // Define associations if needed
 }
 
 Produktai.init(
@@ -29,6 +25,7 @@ Produktai.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false,
     },
     pavadinimas: {
       type: DataTypes.STRING,

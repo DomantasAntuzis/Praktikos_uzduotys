@@ -5,6 +5,7 @@ import Produktai from "../models/products.js";
 
 export async function addItem(req: Request, res: Response, next: NextFunction): Promise<void> {
   interface IAdd {
+    id: number;
     pavadinimas: string;
     aprasymas: string;
     pirkimo_suma: number;
@@ -36,16 +37,23 @@ export async function addItem(req: Request, res: Response, next: NextFunction): 
       return;
     }
 
+    
     const result = await Produktai.create(validData);
-    console.log("result", result);
+    console.log("result", result.id);
 
     logger.info(
-      `Added new item: ${validData}`,
+      `Added new item: ${result.dataValues}`,
     );
     res.status(200).json({
       success: true,
       message: "Item added successfully",
-      data: result,
+      data: {
+        id: result.id,
+        pavadinimas: result.dataValues.pavadinimas,
+        aprasymas: result.dataValues.aprasymas,
+        pirkimo_suma: result.dataValues.pirkimo_suma,
+        pardavimo_suma: result.dataValues.pardavimo_suma,
+      },
     });
   } catch (error) {
     logger.error("Failed to add item", error);

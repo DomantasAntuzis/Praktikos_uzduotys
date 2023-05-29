@@ -13,8 +13,8 @@
   "basePath": "/api",
   "tags": [
     {
-      "name": "Items",
-      "description": "API for users in the system"
+    "name": "Items",
+    "description": "API for users in the system"
     },
     {
     "name": "Operations",
@@ -44,12 +44,12 @@
         "description": "adds Item to database",
         "parameters": [
           {
-            "name": "user",
-            "in": "body",
-            "description": "User that we want to create",
-            "schema": {
-              "$ref": "#/definitions/schemas/addItem"
-            }
+          "name": "user",
+          "in": "body",
+          "description": "User that we want to create",
+          "schema": {
+            "$ref": "#/definitions/schemas/addItem"
+          }
           }
         ],
         "responses":{
@@ -109,12 +109,12 @@
         "summary": "Create new buy order",
         "parameters": [
           {
-            "name": "user",
-            "in": "body",
-            "description": "Order that we want to create",
-            "schema": {
-              "$ref": "#/definitions/schemas/Orders"
-            }
+          "name": "user",
+          "in": "body",
+          "description": "Order that we want to create",
+          "schema": {
+            "$ref": "#/definitions/schemas/Orders"
+          }
           }
         ],
         "responses":{
@@ -134,12 +134,12 @@
         "summary": "Create new sell order",
         "parameters": [
           {
-            "name": "user",
-            "in": "body",
-            "description": "sell order that we want to create",
-            "schema": {
-              "$ref": "#/definitions/schemas/Orders"
-            }
+          "name": "user",
+          "in": "body",
+          "description": "sell order that we want to create",
+          "schema": {
+            "$ref": "#/definitions/schemas/Orders"
+          }
           }
         ],
         "responses":{
@@ -151,7 +151,7 @@
           }
         }
       }
-    },  
+    }  
   },
   "definitions":{
     "schemas": {
@@ -176,44 +176,44 @@
           }
         }
       },
-    "updateItem": {
-      "required": ["id"],
+      "updateItem": {
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type":"string",
+            "example": 1
+          },
+          "pavadinimas": {
+            "type": "string",
+            "example": "pav"
+          },
+          "aprasymas": {
+            "type": "string",
+            "example": "apr"
+          },
+          "pirkimo_suma": {
+            "type": "number",
+            "example": 2.15
+          },
+          "pardavimo_suma": {
+            "type":"number",
+            "example": 6.18
+          }
+        }
+      },
+    "Orders": {
+      "required": ["produkto_id", "kiekis"],
       "properties": {
-        "id": {
-          "type":"string",
+        "produkto_id":{
+          "type":"number",
           "example": 1
         },
-        "pavadinimas": {
-          "type": "string",
-          "example": "pav"
-        },
-        "aprasymas": {
-          "type": "string",
-          "example": "apr"
-        },
-        "pirkimo_suma": {
-          "type": "number",
-          "example": 2.15
-        },
-        "pardavimo_suma": {
+        "kiekis":{
           "type":"number",
-          "example": 6.18
+          "example": 12
         }
-      }
-    },
-  "Orders": {
-    "required": ["produkto_id", "kiekis"],
-    "properties": {
-      "produkto_id":{
-        "type":"number",
-        "example": 1
-      },
-      "kiekis":{
-        "type":"number",
-        "example": 12
       }
     }
   }
-    }
   }
 }
