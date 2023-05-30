@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import productsRoutes from "./routes/products.js";
 import operationsRoutes from "./routes/operations.js";
-// import { errorHandlingMiddleware } from "./middlewares/errorHandling.js";
+import { errorHandlingMiddleware } from "./middlewares/errorHandling.js";
 import sequelize from "./config/sequelize.js";
 import logger from "./config/logger.js";
 import { fileURLToPath } from "url";
@@ -23,10 +23,11 @@ app.use(
 app.use(express.json());
 app.use(express.static(__dirname + "/views"));
 app.use(express.urlencoded({ extended: true }));
-// app.use(errorHandlingMiddleware);
 
 app.use("/api", productsRoutes);
 app.use("/api", operationsRoutes);
+
+app.use(errorHandlingMiddleware);
 
 // not implemented routes
 app.use((_req: Request, res: Response) => {
