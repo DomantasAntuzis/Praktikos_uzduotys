@@ -37,12 +37,11 @@ export async function addItem(req: Request, res: Response, next: NextFunction): 
       return;
     }
 
-    
     const result = await Produktai.create(validData);
     console.log("result", result.id);
 
     logger.info(
-      `Added new item: ${result.dataValues}`,
+      "Added new item:", result.dataValues,
     );
     res.status(200).json({
       success: true,
