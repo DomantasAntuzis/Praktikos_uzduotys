@@ -9,4 +9,8 @@ komanda **tsc** sukompiliuoti ts failus į js
 
 start server with **npm run dev**
 
+view APIs on swagger with this URL **http://localhost:3000/api-docs**
+
+run unit tests with **npm test** 
+
 hope i didnt forget anything
