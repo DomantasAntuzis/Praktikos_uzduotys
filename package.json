@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@google-cloud/storage": "^6.11.0",
     "body-parser": "^1.20.2",
     "db-migrate": "^0.11.13",
     "db-migrate-mysql": "^2.2.0",
@@ -21,8 +22,9 @@
   "type": "module",
   "scripts": {
     "test": "tsc && mocha test/products.test.mjs test/operations.test.mjs",
+    "start": "node ./index.js",
     "dev": "tsc && nodemon ./dist/index.js",
-    "build": "tsc"
+    "build": "tsc && copy src\\app.yaml dist\\ && copy package.json dist\\"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
@@ -46,5 +48,14 @@
     "nodemon": "^2.0.22",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
-  }
+  },
+  "name": "praktika",
+  "description": "how to start server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
 }
