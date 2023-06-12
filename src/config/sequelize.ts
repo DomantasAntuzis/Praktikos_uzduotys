@@ -1,9 +1,9 @@
 import { Sequelize } from "sequelize-typescript";
 const sequelize = new Sequelize({
   database: "warehouse",
-  username: "root",
+  username: "main",
   password: "",
-  host: "localhost",
+  host: "34.116.134.185",
   dialect: "mysql",
 });
 export default sequelize;
