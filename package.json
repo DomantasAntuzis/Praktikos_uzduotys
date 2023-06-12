@@ -22,9 +22,9 @@
   "type": "module",
   "scripts": {
     "test": "tsc && mocha test/products.test.mjs test/operations.test.mjs",
-    "start": "node ./index.js",
-    "dev": "tsc && nodemon ./dist/index.js",
-    "build": "tsc && copy src\\app.yaml dist\\ && copy package.json dist\\"
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "dev": "tsc && node ./dist/index.js"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",

@@ -10,7 +10,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger.json" assert { type: "json" };
 
 const app: Application = express();
-const PORT: number = Number(process.env.PORT) || 3000;
+const PORT: number = Number(process.env.PORT) || 8080;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
