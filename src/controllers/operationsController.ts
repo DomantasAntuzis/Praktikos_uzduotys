@@ -87,6 +87,13 @@ export async function sellOrder(req: Request, res: Response, next: NextFunction)
     const suma = kiekis * kaina;
     const currentLikutis = item.dataValues.likutis;
     const likutis = currentLikutis - kiekis;
+
+    if (likutis < 0) {
+      logger.error(`Not enough stock for item: ${produkto_id}`);
+      res.status(400).json({ error: "Out of stock" });
+      return;
+    }
+    
     await item.update({ likutis });
     await Operacijos.create({ produkto_id, kiekis, kaina, suma });
     logger.info(`Sell order created successfully for item: ${produkto_id}. Amount sold: ${kiekis} for a total of: ${suma}`);
