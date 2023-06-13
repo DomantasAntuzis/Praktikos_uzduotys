@@ -1,18 +1,10 @@
-import express, { Router, Request, Response, NextFunction } from "express";
-import * as productsController from "../controllers/productsController.js";
+import express from "express";
+import { addProduktai, updateProduktai, getAllProduktai } from "../controllers/productsController.js";
 
-const router: Router = express.Router();
+const router = express.Router();
 
-router.post("/addItem", (req: Request, res: Response, next: NextFunction) => {
-  productsController.addItem(req, res, next);
-});
-
-router.put("/updateItem", (req: Request, res: Response, next: NextFunction) => {
-  productsController.updateItem(req, res, next);
-});
-
-router.get("/allItems", (req: Request, res: Response, next: NextFunction) => {
-  productsController.showItems(req, res, next);
-});
+router.post("/addItem", addProduktai);
+router.put("/updateItem", updateProduktai);
+router.get("/allItems", getAllProduktai);
 
 export default router;
