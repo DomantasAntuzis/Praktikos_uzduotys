@@ -1,6 +1,10 @@
 import express, { Application, Request, Response } from "express";
+
+//routes
 import productsRoutes from "./routes/products.js";
 import operationsRoutes from "./routes/operations.js";
+import login_regRoutes from "./routes/auth.js";
+
 import { errorHandlingMiddleware } from "./middlewares/errorHandling.js";
 import sequelize from "./config/sequelize.js";
 import logger from "./config/logger.js";
@@ -31,6 +35,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", productsRoutes);
 app.use("/api", operationsRoutes);
+app.use("/api", login_regRoutes);
 
 // not implemented routes
 app.use((_req: Request, res: Response) => {

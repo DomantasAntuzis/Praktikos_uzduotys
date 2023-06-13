@@ -31,10 +31,18 @@ module.exports = {
       onDelete: "cascade",
       onUpdate: "cascade",
     });
+
+    await queryInterface.createTable("vartotojai", {
+      id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+      vartotojo_vardas: { type: Sequelize.STRING(255), allowNull: false },
+      slaptazodis: { type: Sequelize.STRING(255), allowNull: false },
+      leidimai: { type: Sequelize.INTEGER, defaultValue: 0 },
+    });
   },
 
   down: async queryInterface => {
     await queryInterface.dropTable("operacijos");
     await queryInterface.dropTable("produktai");
+    await queryInterface.dropTable("vartotojai");
   },
 };

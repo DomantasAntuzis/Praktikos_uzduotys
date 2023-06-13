@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import logger from "../config/logger.js";
 import Joi from "joi";
-import Produktai from "../models/products.js";
+import Produktai from "../model/products.js";
 
 export async function addItem(req: Request, res: Response, next: NextFunction): Promise<void> {
   interface IAdd {

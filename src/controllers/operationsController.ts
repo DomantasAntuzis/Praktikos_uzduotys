@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import Joi from "joi";
 import logger from "../config/logger.js";
-import Produktai from "../models/products.js";
-import Operacijos from "../models/operations.js";
+import Produktai from "../model/products.js";
+import Operacijos from "../model/operations.js";
 
 export async function buyOrder(req: Request, res: Response, next: NextFunction): Promise<void> {
   interface IOrder {
