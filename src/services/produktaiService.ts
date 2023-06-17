@@ -14,4 +14,8 @@ export class ProduktaiService {
   static async getAllProduktai(): Promise<Produktai[]> {
     return ProduktaiRepository.findAllProduktai();
   }
+
+  static async findProduktaiById(id: number): Promise<Produktai | null> {
+    return ProduktaiRepository.findProduktaiById(id);
+  }
 }

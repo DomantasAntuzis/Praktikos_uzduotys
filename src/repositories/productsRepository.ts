@@ -8,11 +8,15 @@ export class ProduktaiRepository {
   static async updateProduktai(id: number, data: Partial<Produktai>): Promise<[number, Produktai[]]> {
     const [affectedCount] = await Produktai.update(data, { where: { id } });
     const updatedProduktai = await Produktai.findAll({ where: { id } });
-  
+
     return [affectedCount, updatedProduktai];
   }
-  
+
   static async findAllProduktai(): Promise<Produktai[]> {
     return Produktai.findAll();
+  }
+
+  static async findProduktaiById(id: number): Promise<Produktai | null> {
+    return Produktai.findByPk(id);
   }
 }

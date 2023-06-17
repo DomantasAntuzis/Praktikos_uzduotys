@@ -1,7 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
 
-interface OperacijosAttributes {
+export interface OperacijosAttributes {
   id?: number;
   produkto_id: number;
   kiekis: number;
@@ -9,7 +9,7 @@ interface OperacijosAttributes {
   suma: number;
 }
 
-class Operacijos extends Model<OperacijosAttributes> implements OperacijosAttributes {
+export class Operacijos extends Model<OperacijosAttributes> implements OperacijosAttributes {
   public id!: number;
   public produkto_id!: number;
   public kiekis!: number;
@@ -47,5 +47,3 @@ Operacijos.init(
     timestamps: false,
   },
 );
-
-export default Operacijos;

@@ -1,18 +1,10 @@
-import express, { Router, Request, Response, NextFunction } from "express";
-import * as operationsController from "../controllers/operationsController.js";
+import express from "express";
+import { buyOrder, sellOrder, showOrders } from "../controllers/operationsController.js";
 
-const router: Router = express.Router();
+const router = express.Router();
 
-router.post("/buyOrder", (req: Request, res: Response, next: NextFunction) => {
-  operationsController.buyOrder(req, res, next);
-});
-
-router.post("/sellOrder",  (req: Request, res: Response, next: NextFunction) => {
-  operationsController.sellOrder(req, res, next);
-});
-
-router.get("/allOrders", (req: Request, res: Response, next: NextFunction) => {
-  operationsController.showOrders(req, res, next);
-});
+router.post("/buyOrder", buyOrder);
+router.post("/sellOrder", sellOrder);
+router.get("/allOrders", showOrders);
 
 export default router;
