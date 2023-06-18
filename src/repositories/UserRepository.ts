@@ -6,6 +6,7 @@ export class UserRepository {
   }  
 
   static async findUserByVartotojoVardas(vartotojo_vardas: string): Promise<User | null> {
-    return User.findOne({ where: { vartotojo_vardas } });
+    const user = await User.findOne({ where: { vartotojo_vardas } });
+    return user || null;
   }
 }

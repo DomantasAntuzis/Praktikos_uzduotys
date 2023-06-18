@@ -20,4 +20,9 @@ export class AuthService {
     console.log("Password Match:", passwordMatch);
     return passwordMatch;
   }
+
+  static async getUserPermissions(username: string): Promise<number | null | undefined> {
+    const user = await UserRepository.findUserByVartotojoVardas(username);
+    return user ? user.dataValues.leidimai : null;
+  }
 }
