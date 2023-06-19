@@ -36,7 +36,7 @@ module.exports = {
       id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
       vartotojo_vardas: { type: Sequelize.STRING(255), allowNull: false },
       slaptazodis: { type: Sequelize.STRING(255), allowNull: false },
-      leidimai: { type: Sequelize.INTEGER, defaultValue: 0 },
+      leidimai: { type: Sequelize.INTEGER, defaultValue: 15 },
     });
   },
 

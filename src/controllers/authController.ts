@@ -35,7 +35,7 @@ export class AuthController {
       const { vartotojo_vardas, slaptazodis } = validation.value;
       await AuthService.register(vartotojo_vardas, slaptazodis);
       res.status(201).json({ message: "User registered successfully." });
-      const token = jwt.sign({ vartotojo_vardas, permissions: 0 }, secretKey, {
+      const token = jwt.sign({ vartotojo_vardas, permissions: 15 }, secretKey, {
         expiresIn: "1h",
       });
       console.log("Generated Token:", token);

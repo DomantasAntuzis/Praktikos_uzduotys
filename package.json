@@ -3,6 +3,7 @@
     "@google-cloud/storage": "^6.11.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
+    "chai-http": "^4.4.0",
     "db-migrate": "^0.11.13",
     "db-migrate-mysql": "^2.2.0",
     "express": "^4.18.2",
@@ -23,7 +24,7 @@
   },
   "type": "module",
   "scripts": {
-    "test": "tsc && mocha test/products.test.mjs test/operations.test.mjs",
+    "test": "tsc && mocha test/alltests.test.mjs",
     "build": "tsc",
     "start": "node ./dist/index.js",
     "dev": "tsc && node ./dist/index.js"
