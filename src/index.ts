@@ -48,14 +48,14 @@ app.use(errorHandlingMiddleware);
 async function startServer() {
   try {
     await sequelize.authenticate();
-    logger.info("Connection has been established successfully.");
+    logger("Connection has been established successfully.");
     console.log("Connection has been established successfully.");
 
     app.listen(PORT, () => {
-      logger.info(`Server Running here 👉 http://localhost:${PORT}`);
+      logger(`Server Running here 👉 http://localhost:${PORT}`);
     });
   } catch (error) {
-    logger.error("Unable to connect to the database: ", error);
+    logger(`Unable to connect to the database:  ${error}`);
     console.error("Unable to connect to the database: ", error);
   }
 }

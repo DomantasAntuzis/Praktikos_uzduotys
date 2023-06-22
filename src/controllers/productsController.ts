@@ -16,7 +16,7 @@ export async function addProduktai(req: Request, res: Response, next: NextFuncti
   const validation = produktaiSchema.validate(req.body);
 
   if (validation.error) {
-    logger.error("Validation error while adding item", validation.error);
+    logger(`Validation error while adding item ${validation.error.message}`);
     res.status(400).json({
       success: false,
       message: "Invalid request data",
@@ -41,7 +41,7 @@ export async function addProduktai(req: Request, res: Response, next: NextFuncti
       },
     });
   } catch (error) {
-    logger.error("Failed to add item", error);
+    logger(`Failed to add item ${error}`);
     next(error);
   }
 }
@@ -59,7 +59,7 @@ export async function updateProduktai(req: Request, res: Response, next: NextFun
   try {
     const validation = updateItemSchema.validate(req.body);
     if (validation.error) {
-      logger.error("Validation error while updating item", validation.error);
+      logger(`Validation error while updating item ${validation.error.message}`);
       res.status(400).json({
         success: false,
         message: "Invalid request data",
@@ -78,7 +78,7 @@ export async function updateProduktai(req: Request, res: Response, next: NextFun
       res.status(404).json({ error: "Item not found" });
     }
   } catch (error) {
-    logger.error("Failed to update item", error);
+    logger(`Failed to update item ${error}`);
     next(error);
   }
 }
@@ -88,7 +88,7 @@ export async function getAllProduktai(req: Request, res: Response, next: NextFun
     const allItems = await ProduktaiService.getAllProduktai();
     res.status(200).json(allItems);
   } catch (error) {
-    logger.error("Failed to get all items", error);
+    logger(`Failed to get all items ${error}`);
     next(error);
   }
 }

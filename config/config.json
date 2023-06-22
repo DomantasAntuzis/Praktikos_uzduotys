@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "main",
+    "username": "root",
     "password": "",
     "database": "warehouse",
-    "host": "34.116.134.185",
+    "host": "34.118.3.177",
     "dialect": "mysql"
   },
   "test": {
-    "username": "main",
+    "username": "root",
     "password": "",
     "database": "warehouse",
-    "host": "34.116.134.185",
+    "host": "34.118.3.177",
     "dialect": "mysql"
   },
   "production": {
-    "username": "main",
+    "username": "root",
     "password": "",
     "database": "warehouse",
-    "host": "34.116.134.185",
+    "host": "34.118.3.177",
     "dialect": "mysql"
   }
 }

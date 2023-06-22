@@ -22,7 +22,7 @@ export class AuthController {
     const validation = schema.validate(req.body);
     
     if (validation.error) {
-      logger.error("Validation error while registering user", validation.error);
+      logger(`Validation error while registering user ${validation.error.message}`);
       res.status(400).json({
         success: false,
         message: "Invalid request data",
@@ -40,7 +40,7 @@ export class AuthController {
       });
       console.log("Generated Token:", token);
     } catch (error) {
-      logger.error("Failed to register user", error);
+      logger(`Failed to register user ${error}`);
       res.status(500).json({ error: "Internal server error." });
     }
   }
@@ -49,7 +49,7 @@ export class AuthController {
     const validation = schema.validate(req.body);
   
     if (validation.error) {
-      logger.error("Validation error while logging in", validation.error);
+      logger(`Validation error while logging in ${validation.error}`);
       res.status(400).json({
         success: false,
         message: "Invalid request data",
@@ -72,7 +72,7 @@ export class AuthController {
         res.status(401).json({ error: "Invalid credentials." });
       }
     } catch (error) {
-      logger.error("Failed to perform login", error);
+      logger(`Failed to perform login ${error}`);
       res.status(500).json({ error: "Internal server error." });
     }
   }

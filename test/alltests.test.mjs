@@ -1,6 +1,7 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import app from "../dist/index.js";
+import { describe, it } from "mocha";
 
 const { expect } = chai;
 chai.use(chaiHttp);
@@ -9,7 +10,7 @@ let authToken;
 
 describe("Auth API Tests", () => {
   describe("POST /register", () => {
-    it("should register a new user and return 201 status code", (done) => {
+    it("should register a new user and return 201 status code", done => {
       chai
         .request(app)
         .post("/api/register")
@@ -25,7 +26,7 @@ describe("Auth API Tests", () => {
         });
     });
 
-    it("should return 400 status code with invalid request data", (done) => {
+    it("should return 400 status code with invalid request data", done => {
       chai
         .request(app)
         .post("/api/register")
@@ -40,7 +41,7 @@ describe("Auth API Tests", () => {
   });
 
   describe("POST /login", () => {
-    it("should authenticate a user and return 200 status code with a token", (done) => {
+    it("should authenticate a user and return 200 status code with a token", done => {
       chai
         .request(app)
         .post("/api/login")
@@ -57,7 +58,7 @@ describe("Auth API Tests", () => {
         });
     });
 
-    it("should return 400 status code with invalid request data", (done) => {
+    it("should return 400 status code with invalid request data", done => {
       chai
         .request(app)
         .post("/api/login")
@@ -74,7 +75,7 @@ describe("Auth API Tests", () => {
 
 describe("Product API Tests", () => {
   describe("POST /addItem", () => {
-    it("should add a new product and return 201 status code", (done) => {
+    it("should add a new product and return 201 status code", done => {
       chai
         .request(app)
         .post("/api/addItem")
@@ -92,7 +93,7 @@ describe("Product API Tests", () => {
           done();
         });
     });
-    it("should return 400 status code with invalid request data", (done) => {
+    it("should return 400 status code with invalid request data", done => {
       chai
         .request(app)
         .post("/api/addItem")
@@ -108,7 +109,7 @@ describe("Product API Tests", () => {
   });
 
   describe("PUT /updateItem", () => {
-    it("should update a product and return 200 status code", (done) => {
+    it("should update a product and return 200 status code", done => {
       chai
         .request(app)
         .put("/api/updateItem")
@@ -127,7 +128,7 @@ describe("Product API Tests", () => {
         });
     });
 
-    it("should return 400 status code with invalid request data", (done) => {
+    it("should return 400 status code with invalid request data", done => {
       chai
         .request(app)
         .put("/api/updateItem")
@@ -146,7 +147,7 @@ describe("Product API Tests", () => {
 
 describe("Order API Tests", () => {
   describe("POST /buyOrder", () => {
-    it("should create a buy order and return 200 status code", (done) => {
+    it("should create a buy order and return 200 status code", done => {
       chai
         .request(app)
         .post("/api/buyOrder")
@@ -163,7 +164,7 @@ describe("Order API Tests", () => {
         });
     });
 
-    it("should return 400 status code with invalid request data", (done) => {
+    it("should return 400 status code with invalid request data", done => {
       chai
         .request(app)
         .post("/api/buyOrder")
@@ -179,7 +180,7 @@ describe("Order API Tests", () => {
   });
 
   describe("POST /sellOrder", () => {
-    it("should create a sell order and return 200 status code", (done) => {
+    it("should create a sell order and return 200 status code", done => {
       chai
         .request(app)
         .post("/api/sellOrder")
@@ -196,7 +197,7 @@ describe("Order API Tests", () => {
         });
     });
 
-    it("should return 400 status code with invalid request data", (done) => {
+    it("should return 400 status code with invalid request data", done => {
       chai
         .request(app)
         .post("/api/sellOrder")
@@ -213,7 +214,7 @@ describe("Order API Tests", () => {
 });
 
 describe("Not implemented API Tests", () => {
-  it("should return a 501 status code and 'Not Implemented' message", (done) => {
+  it("should return a 501 status code and 'Not Implemented' message", done => {
     chai
       .request(app)
       .get("/api/unknown")
