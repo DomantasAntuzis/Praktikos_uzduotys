@@ -1,3 +1,4 @@
 node_modules/
 dist/
 logs/
+client/node_modules/

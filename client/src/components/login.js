@@ -1,35 +1,36 @@
 import React, { useState } from 'react';
 
-const Login = () => {
+const Login = ({onLogin}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create the request body
-    const requestBody = {
-      vartotojo_vardas: username,
-      slaptazodis: password,
-    };
+    try {
+      const requestBody = {
+        vartotojo_vardas: username,
+        slaptazodis: password,
+      };
 
-    // Send the login request to the server
-    fetch('http://localhost:4000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestBody),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the response data
-        console.log(data);
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.error('Login request failed:', error);
+      const response = await fetch('http://localhost:4000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        onLogin(data.permissions);
+        console.log('Login successful:', data);
+      } else {
+        console.error('Login failed:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Login request failed:', error);
+    }
   };
 
   return (

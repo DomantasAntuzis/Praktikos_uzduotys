@@ -7,7 +7,7 @@ import login_regRoutes from "./routes/auth.js";
 
 import { errorHandlingMiddleware } from "./middlewares/errorHandling.js";
 import sequelize from "./config/sequelize.js";
-import logger from "./config/logger.js";
+// import logger from "./config/logger.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import swaggerUi from "swagger-ui-express";
@@ -51,14 +51,14 @@ app.use(errorHandlingMiddleware);
 async function startServer() {
   try {
     await sequelize.authenticate();
-    logger("Connection has been established successfully.");
+    // logger("Connection has been established successfully.");
     console.log("Connection has been established successfully.");
 
     app.listen(PORT, () => {
-      logger(`Server Running here 👉 http://localhost:${PORT}`);
+      // logger(`Server Running here 👉 http://localhost:${PORT}`);
     });
   } catch (error) {
-    logger(`Unable to connect to the database:  ${error}`);
+    // logger(`Unable to connect to the database:  ${error}`);
     console.error("Unable to connect to the database: ", error);
   }
 }

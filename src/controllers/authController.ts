@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { AuthService } from "../services/authService.js";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
-import logger from "../config/logger.js";
+// import logger from "../config/logger.js";
 
 interface IAuth {
   vartotojo_vardas: string;
@@ -22,7 +22,7 @@ export class AuthController {
     const validation = schema.validate(req.body);
     
     if (validation.error) {
-      logger(`Validation error while registering user ${validation.error.message}`);
+      // logger(`Validation error while registering user ${validation.error.message}`);
       res.status(400).json({
         success: false,
         message: "Invalid request data",
@@ -40,7 +40,7 @@ export class AuthController {
       });
       console.log("Generated Token:", token);
     } catch (error) {
-      logger(`Failed to register user ${error}`);
+      // logger(`Failed to register user ${error}`);
       res.status(500).json({ error: "Internal server error." });
     }
   }
@@ -49,7 +49,7 @@ export class AuthController {
     const validation = schema.validate(req.body);
   
     if (validation.error) {
-      logger(`Validation error while logging in ${validation.error}`);
+      // logger(`Validation error while logging in ${validation.error}`);
       res.status(400).json({
         success: false,
         message: "Invalid request data",
@@ -67,12 +67,12 @@ export class AuthController {
           expiresIn: "1h",
         });
         console.log("Generated Token:", token);
-        res.status(200).json({ message: "Login successful.", token });
+        res.status(200).json({ message: "Login successful.", token, permissions });
       } else {
         res.status(401).json({ error: "Invalid credentials." });
       }
     } catch (error) {
-      logger(`Failed to perform login ${error}`);
+      // logger(`Failed to perform login ${error}`);
       res.status(500).json({ error: "Internal server error." });
     }
   }
