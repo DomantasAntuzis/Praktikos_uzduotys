@@ -3,7 +3,7 @@ import { Logging } from "@google-cloud/logging";
 const projectId = "warehouse-389509"; // Your Google Cloud Platform project ID
 const logName = "my-logs"; // The name of the log to write to
 
-function logger(
+async function logger(
   text: string,
 ) {
   // Creates a client

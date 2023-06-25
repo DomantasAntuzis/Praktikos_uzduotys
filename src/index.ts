@@ -12,9 +12,10 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger.json" assert { type: "json" };
+import cors from "cors";
 
 const app: Application = express();
-const PORT: number = Number(process.env.PORT) || 3000;
+const PORT: number = Number(process.env.PORT) || 4000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -32,6 +33,8 @@ app.use(
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.use(cors());
 
 app.use("/api", productsRoutes);
 app.use("/api", operationsRoutes);
